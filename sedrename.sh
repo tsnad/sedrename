@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 # made by tsnad
-# ver=0.9
 
 #
 # make gud
 # maketh dank
-#
-# fix if last rename command didnt match anything so mv returns 1; to be successful
 #
 
 if (( EUID == 0 )); then
@@ -94,15 +91,6 @@ lowerizing_opt() {
 	exit
 }
 
-parallel_opt() {
-	DIR="$1"
-	cd "$DIR" || exit 1
-
-	get_files
-
-	parallel mv $LOUD ::: "$FILES" :::+ "$($FILES | sed "$2")"
-}
-
 for_recursive_loop() {
 	get_files
 
@@ -156,7 +144,7 @@ save_last_arguments() {
 LASTCOMMAND="/tmp/last_sedrename_command.tmp"
 LOUD='-v'
 
-while getopts "hupqnrlP" opt; do
+while getopts "hupqnrl" opt; do
 	case "$opt" in
 		h) help_opt && exit ;;
 		u) undo_opt ;;
@@ -165,7 +153,6 @@ while getopts "hupqnrlP" opt; do
 		n) normalizing_opt "$2" ;;
 		l) lowerizing_opt "$2" ;;
 		r) recursive_opt "$3" "$2" ;;
-		P) parallel_opt "$3" "$2" ;;
 		\?) help_opt && exit 1;;
 	esac
 done
@@ -175,3 +162,4 @@ done
 
 shift $(( OPTIND -1 ))
 reg_opt "$2" "$1"
+
