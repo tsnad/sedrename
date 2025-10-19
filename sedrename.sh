@@ -115,11 +115,12 @@ recursive_opt() {
 }
 
 undo_opt() {
-	INVERSION=$(awk '(NR == 1) {print $0} \
+	INVERSION="$(awk '(NR == 1) {print $0} \
 		BEGIN {FS="/"; OFS="/"} \
-		(NR == 2) {print $1,$3,$2,$4}' "$LASTCOMMAND")
+		(NR == 2) {print $1,$3,$2,$4}' "$LASTCOMMAND")"
+
 	DIR="$(echo "$INVERSION" | head -n 1)"
-	SED=$(echo "$INVERSION" | tail -n 1)
+	SED="$(echo "$INVERSION" | tail -n 1)"
 
 	IFS=$'\n'
 
@@ -128,8 +129,12 @@ undo_opt() {
 	get_files
 
 	for line in "${FILES[@]}"; do
-		mv $LOUD "$line" "$(echo "$line" | sed "$SED")" 
+		LINE2="$(echo "$line" | sed $SED)"
+		mv $LOUD "$line" "$LINE2"
 	done
+
+	save_last_arguments "$DIR" "$SED"
+
 	exit
 }
 
