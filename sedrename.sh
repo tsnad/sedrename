@@ -14,7 +14,7 @@ fi
 # NON FUN FUNCTIONS
 
 help_opt() {
-	echo 'Usage: [OPTION] [SED ARGUMENTS] [DIRECTORY]' 
+	echo 'Usage: [OPTION] [SED ARGUMENT] [DIRECTORY]' 
 	printf "\n"
 	echo 'Options:	-h, help
 		-U, update (only works for $HOME/.local/bin/)
@@ -29,11 +29,19 @@ help_opt() {
 
 # INDIFFERENT FUNCTIONS
 
+whoops() {
+	tput setaf 196
+	echo ERROR: "$1"
+	tput sgr0
+	help_opt
+	exit 1
+}
+
 get_to_dir() {
 	IFS=$'\n'
 
 	DIR="$1"
-	cd "$DIR" || exit 1
+	cd "$DIR" || whoops 'could not cd into directory'
 }
 
 get_files() {
@@ -41,8 +49,10 @@ get_files() {
 }
 
 update_sedrename() {
-	cd "$HOME"/.local/bin/ || exit 1
-	wget -O "sedrename.sh" "$GITLINK" || exit 1
+	cd "$HOME"/.local/bin/ || \
+		whoops "could not cd into $HOME/.local/bin/"
+	wget -O "sedrename.sh" "$GITLINK" || \
+		whoops 'could not get sedrename'
 	chmod u+x sedrename.sh
 	exit
 }
@@ -69,8 +79,7 @@ pretend_opt() {
 		echo "$line" '-->' "$(echo "$line" | sed "$2")" 
 	done
 
-	printf "\n"
-	echo 'Example of what would be modified. Nothing was modified. DO NOT WORRY.'
+	printf "\nExample of what would be modified. Nothing was modified. DO NOT WORRY.\n"
 
 	exit
 }
@@ -132,7 +141,7 @@ undo_opt() {
 
 	IFS=$'\n'
 
-	cd "$DIR" || exit 1
+	cd "$DIR" || whoops 'could not cd into dir'
 
 	get_files
 
@@ -172,8 +181,8 @@ while getopts "hUupqnrl" opt; do
 	esac
 done
 
-[[ -z $1 ]] && exit 1
-[[ -z $2 ]] && exit 1
+[[ -z $1 ]] && whoops 'missing args'
+[[ -z $2 ]] && whoops 'missing args'
 
 shift $(( OPTIND -1 ))
 reg_opt "$2" "$1"

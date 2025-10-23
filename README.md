@@ -69,8 +69,8 @@ or add it to ~/.local/bin if it's in your $PATH
 
 ```
 mv sedrename.sh ~/.local/bin/
-
 ```
+
 
 ## Author
 
