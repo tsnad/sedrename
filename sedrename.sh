@@ -17,6 +17,7 @@ help_opt() {
 	echo 'Usage: [OPTION] [SED ARGUMENTS] [DIRECTORY]' 
 	printf "\n"
 	echo 'Options:	-h, help
+		-U, update (only works for $HOME/.local/bin/)
 		-q, quiet
 		-p, pretend
 		-r, recursive
@@ -37,6 +38,13 @@ get_to_dir() {
 
 get_files() {
 	FILES=($(find . -maxdepth 1 -type f -printf "%P\n" | grep -v -P "^\."))
+}
+
+update_sedrename() {
+	cd $HOME/.local/bin/
+	wget -O "sedrename.sh" https://raw.githubusercontent.com/tsnad/sedrename/refs/heads/master/sedrename.sh
+	chmod u+x sedrename.sh
+	exit
 }
 
 # FUN FUNCTIONS
@@ -149,9 +157,10 @@ save_last_arguments() {
 LASTCOMMAND="/tmp/last_sedrename_command.tmp"
 LOUD='-v'
 
-while getopts "hupqnrl" opt; do
+while getopts "hUupqnrl" opt; do
 	case "$opt" in
 		h) help_opt && exit ;;
+		U) update_sedrename ;;
 		u) undo_opt ;;
 		p) pretend_opt "$3" "$2" ;;
 		q) LOUD='' ;;
