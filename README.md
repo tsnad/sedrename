@@ -10,10 +10,24 @@ gnutils, bash
 ## Examples
 
 ```
+$ sedrename -h
+Options:	-h, help
+		-U, update (only works for $HOME/.local/bin/)
+		-q, quiet
+		-p, pretend
+		-r, recursive
+		-n, normalize (for command line use, replaces spaces with underscores,
+	       			removes emojis, unicode characters, etc)
+		-l, lowerize
+		-u, undo (doesnt work with -l, -n, or -r)
+```
+
+```
 $ ls
  agreement.null               garbage.win         policy
 'decision estate operation'   location.tracking   profession
  engineering                  orange/            'selection instruction'
+
 $ sedrename.sh 's/e/WOAH/g' .
 mv: 'policy' and 'policy' are the same file
 renamed 'selection instruction' -> 'sWOAHlWOAHction instruction'
@@ -23,6 +37,7 @@ renamed 'profession' -> 'profWOAHssion'
 mv: 'location.tracking' and 'location.tracking' are the same file
 renamed 'agreement.null' -> 'agrWOAHWOAHmWOAHnt.null'
 renamed 'garbage.win' -> 'garbagWOAH.win'
+
 $ ls
  agrWOAHWOAHmWOAHnt.null                  policy
 'dWOAHcision WOAHstatWOAH opWOAHration'   profWOAHssion
@@ -83,4 +98,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 Thanks to [You Suck at Programming](https://www.youtube.com/@yousuckatprogramming) for the bash tutorials
+
+Usage: [OPTION] [SED ARGUMENT] [DIRECTORY]
 
