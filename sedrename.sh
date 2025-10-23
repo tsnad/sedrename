@@ -41,8 +41,8 @@ get_files() {
 }
 
 update_sedrename() {
-	cd $HOME/.local/bin/
-	wget -O "sedrename.sh" https://raw.githubusercontent.com/tsnad/sedrename/refs/heads/master/sedrename.sh
+	cd "$HOME"/.local/bin/ || exit 1
+	wget -O "sedrename.sh" "$GITLINK" || exit 1
 	chmod u+x sedrename.sh
 	exit
 }
@@ -154,6 +154,7 @@ save_last_arguments() {
 
 # MAIN FUNCTION
 
+GITLINK="https://raw.githubusercontent.com/tsnad/sedrename/refs/heads/master/sedrename.sh"
 LASTCOMMAND="/tmp/last_sedrename_command.tmp"
 LOUD='-v'
 
