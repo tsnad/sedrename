@@ -14,7 +14,7 @@ $ ls
  agreement.null               garbage.win         policy
 'decision estate operation'   location.tracking   profession
  engineering                  orange/            'selection instruction'
-$ sedrename.sh 's/e/woah/g' .
+$ sedrename.sh 's/e/WOAH/g' .
 mv: 'policy' and 'policy' are the same file
 renamed 'selection instruction' -> 'sWOAHlWOAHction instruction'
 renamed 'engineering' -> 'WOAHnginWOAHWOAHring'
@@ -37,12 +37,12 @@ You can undo the previous command with the -u flag
 $ sedrename.sh -u 
 mv: 'policy' and 'policy' are the same file
 mv: 'location.tracking' and 'location.tracking' are the same file
-renamed 'swoahlwoahction instruction' -> 'selection instruction'
-renamed 'woahnginwoahwoahring' -> 'engineering'
-renamed 'dwoahcision woahstatwoah opwoahration' -> 'decision estate operation'
-renamed 'profwoahssion' -> 'profession'
-renamed 'agrwoahwoahmwoahnt.null' -> 'agreement.null'
-renamed 'garbagwoah.win' -> 'garbage.win'
+renamed 'sWOAHlWOAHction instruction' -> 'selection instruction'
+renamed 'WOAHnginWOAHWOAHring' -> 'engineering'
+renamed 'dWOAHcision WOAHstatWOAH opWOAHration' -> 'decision estate operation'
+renamed 'profWOAHssion' -> 'profession'
+renamed 'agrWOAHWOAHmWOAHnt.null' -> 'agreement.null'
+renamed 'garbagWOAH.win' -> 'garbage.win'
 ```
 
 ## Installation
@@ -82,5 +82,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-* Thanks to [You Suck at Programming](https://www.youtube.com/@yousuckatprogramming) for the bash tutorials
+Thanks to [You Suck at Programming](https://www.youtube.com/@yousuckatprogramming) for the bash tutorials
 
