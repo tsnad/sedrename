@@ -11,6 +11,7 @@ gnutils, bash
 
 ```
 $ sedrename -h
+Usage: [OPTION] [SED ARGUMENT] [DIRECTORY]
 Options:	-h, help
 		-U, update (only works for $HOME/.local/bin/)
 		-q, quiet
@@ -98,6 +99,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 Thanks to [You Suck at Programming](https://www.youtube.com/@yousuckatprogramming) for the bash tutorials
-
-Usage: [OPTION] [SED ARGUMENT] [DIRECTORY]
 
